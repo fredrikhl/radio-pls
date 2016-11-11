@@ -1,0 +1,20 @@
+bbc:
+  radio1:
+    name: BBC Radio 1
+    url: http://bbc/1
+    tags:
+      - bbc
+
+  radio2:
+    name: BBC Radio 2
+    url: http://bbc/2
+    tags:
+      - bbc
+
+kexp:
+  name: KEXP
+  url: http://kexp
+  tags:
+    - uni
+
+
