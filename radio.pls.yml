@@ -1,20 +1,447 @@
-bbc:
-  radio1:
-    name: BBC Radio 1
-    url: http://bbc/1
-    tags:
-      - bbc
-
-  radio2:
-    name: BBC Radio 2
-    url: http://bbc/2
-    tags:
-      - bbc
-
-kexp:
-  name: KEXP
-  url: http://kexp
+# NRK
+- name: NRK P1, Østlandssendingen
+  url: http://lyd.nrk.no/nrk_radio_p1_ostlandssendingen_mp3_h
   tags:
+    - nrk
+    - nrk p1
+    - p1
+
+- name: NRK P2
+  url: http://lyd.nrk.no/nrk_radio_p2_mp3_h
+  tags:
+    - nrk
+    - nrk p2
+    - p2
+
+- name: NRK P3
+  url: http://lyd.nrk.no/nrk_radio_p3_mp3_h
+  tags:
+    - nrk
+    - nrk p3
+    - p3
+
+- name: NRK Radioresepsjonen
+  url: http://lyd.nrk.no/nrk_radio_p3_radioresepsjonen_mp3_h
+  tags:
+    - nrk
+    - nrk rr
+    - radioresepsjonen
+
+- name: NRK P3 Pyro
+  url: http://lyd.nrk.no/nrk_radio_p3_pyro_mp3_h
+  tags:
+    - nrk
+    - nrk pyro
+    - pyro
+
+- name: NRK P3 Urørt
+  url: http://lyd.nrk.no/nrk_radio_p3_urort_mp3_h
+  tags:
+    - nrk
+    - nrk urørt
+    - urørt
+
+- name: NRK Alltid Nyheter
+  url: http://lyd.nrk.no/nrk_radio_alltid_nyheter_mp3_h
+  tags:
+    - nrk
+    - nrk alltid nyheter
+    - news
+
+
+# uni
+
+- name: KALX 90.7 FM UC Berkeley
+  url: http://icecast.media.berkeley.edu:8000/kalx-128.ogg
+  tags:
+    - kalx
     - uni
 
+- name: KCRW 89.9 FM Santa Monica
+  url: http://kcrw.streamguys1.com/kcrw_192k_mp3_on_air
+  tags:
+    - kexp
+    - uni
+
+- name: KCRW Music (Eclectic24)
+  url: http://kcrw.streamguys1.com/kcrw_192k_mp3_e24
+  tags:
+    - kcrw
+    - kcrw music
+    - eclectic24
+    - uni
+
+- name: KCRW World News
+  url: http://kcrw.streamguys1.com/kcrw_192k_mp3_news
+  tags:
+    - kcrw
+    - kcrw world news
+    - news
+    - uni
+
+- name: KEXP 90.3 FM Seattle
+  url: http://live-mp3-128.kexp.org:8000/
+  tags:
+    - kexp
+    - uni
+
+- name: KPSU 98.1 FM Portland State
+  url: http://131.252.216.13:8080/listen
+  tags:
+    - kpsu
+    - uni
+
+- name: KUSF San Fransisco
+  url: http://104.236.145.45:8000/stream
+  tags:
+    - kusf
+    - uni
+
+- name: KVRX 91.7 FM Austin
+  url: http://tstv-stream.tsm.utexas.edu:8000/kvrx_livestream
+  tags:
+    - kvrx
+    - uni
+
+- name: KXLU 88.9 FM Los Angeles
+  url: http://www.ednixon.com:8120/stream
+  tags:
+    - kxlu
+    - uni
+
+- name: WITR 89.7 FM Rochester
+  url: http://streaming.witr.rit.edu:8000/live
+  tags:
+    - witr
+    - uni
+
+# Too quiet
+# - name: WSOU 89.5 FM Seton Hall
+#   url: http://crystalout.surfernetwork.com:8001/WSOU_MP3
+
+# Too weird
+# - name: WOBC 91.5 Oberlin College
+#   url: http://132.162.36.191:8000/listen
+
+- name: WERS 88.9 FM Emerson College
+  url: http://marconi.emerson.edu:8000/wers
+  tags:
+    - wers
+    - uni
+
+- name: WGRW 91.5 FM DePauw
+  url: http://184.154.90.186:8181
+  tags:
+    - wgrw
+    - uni
+
+- name: Radio Nova
+  url: http://stream.radionova.no:80/fm993.mp3
+  tags:
+    - radio nova
+    - uni
+
+- name: Kunnskapstorget
+  url: http://stream.radionova.no:80/kunnskapstoget.mp3
+  tags:
+    - radio nova
+    - kunnskapstorget
+    - uni
+
+# Other
+
+- name: NPR 24 Hour Program Stream
+  url: http://nprdmp.ic.llnwd.net/stream/nprdmp_live01_mp3
+  tags:
+    - npr
+    - npr radio
+
+- name: NPR all songs considered
+  url: http://nprdmp.ic.llnwd.net/stream/nprdmp_live21_mp3
+  tags:
+    - npr
+    - npr all songs considered
+
+- name: Punk FM
+  url: http://46.28.49.164:7508/stream
+  tags:
+    - punk
+    - punk fm
+
+- name: Mohawk Radio
+  url: http://mohawkradio.kicks-ass.net:8000/
+  tags:
+    - punk
+    - mohawk
+
+- name: 12punks.FM
+  url: http://listen.12punks.fm
+  tags:
+    - punk
+    - 12punks
+
+# Soma
+
+- name: "SomaFM: Sonic Universe"
+  url: http://ice2.somafm.com/sonicuniverse-64-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Suburbs of Goa"
+  url: http://ice1.somafm.com/suburbsofgoa-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Beat Blender"
+  url: http://ice1.somafm.com/beatblender-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: The Trip"
+  url: http://ice2.somafm.com/thetrip-64-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: ThistleRadio"
+  url: http://ice1.somafm.com/thistle-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Folk Forward"
+  url: http://ice1.somafm.com/folkfwd-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Boot Liquor"
+  url: http://ice1.somafm.com/bootliquor-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Digitalis"
+  url: http://ice1.somafm.com/digitalis-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Illinois Street Lounge"
+  url: http://ice1.somafm.com/illstreet-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Seven Inch Soul"
+  url: http://ice1.somafm.com/7soul-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Left Coast 70s"
+  url: http://ice1.somafm.com/seventies-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Underground 80s"
+  url: http://ice1.somafm.com/u80s-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: The Silent Channel"
+  url: http://ice1.somafm.com/silent-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Drone Zone"
+  url: http://ice1.somafm.com/dronezone-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Space Station Soma"
+  url: http://ice1.somafm.com/spacestation-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: DEF CON Radio"
+  url: http://ice1.somafm.com/defcon-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Groove Salad"
+  url: http://ice1.somafm.com/groovesalad-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Secret Agent"
+  url: http://ice1.somafm.com/secretagent-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Lush"
+  url: http://ice1.somafm.com/lush-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Fluid"
+  url: http://ice1.somafm.com/fluid-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Deep Space One"
+  url: http://ice1.somafm.com/deepspaceone-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Mission Control"
+  url: http://ice2.somafm.com/missioncontrol-64-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: SF 10-33"
+  url: http://ice2.somafm.com/sf1033-64-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Dub Step Beyond"
+  url: http://ice2.somafm.com/dubstep-64-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: cliqhop idm"
+  url: http://ice1.somafm.com/cliqhop-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: PopTron"
+  url: http://ice2.somafm.com/poptron-64-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Indie Pop Rocks!"
+  url: http://ice1.somafm.com/indiepop-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: BAGeL Radio"
+  url: http://ice2.somafm.com/bagel-64-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Metal Detector"
+  url: http://ice1.somafm.com/metal-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Earwaves"
+  url: http://ice1.somafm.com/earwaves-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Covers"
+  url: http://ice2.somafm.com/covers-64-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Doomed"
+  url: http://ice2.somafm.com/doomed-64-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Black Rock FM"
+  url: http://ice1.somafm.com/brfm-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+
+- name: "SomaFM: Xmas in Frisko"
+  url: http://ice2.somafm.com/xmasinfrisko-64-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+    - xmas
+
+- name: "SomaFM: Christmas Lounge"
+  url: http://ice1.somafm.com/christmas-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+    - xmas
+
+- name: "SomaFM: Christmas Rocks!"
+  url: http://ice1.somafm.com/xmasrocks-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+    - xmas
+
+- name: "SomaFM: Jolly Ol' Soul"
+  url: http://ice1.somafm.com/jollysoul-128-aac
+  tags:
+    - soma
+    - soma fm
+    - music
+    - xmas
 
