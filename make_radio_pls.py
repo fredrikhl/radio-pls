@@ -25,9 +25,8 @@ Length{num:d}={length:d}
 """.strip()
 
 DEFAULT_ENCODING = 'utf-8'
-
 DEFAULT_CONFIG = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                              'radio.pls.yml')
+                              'streams.yml')
 
 
 def format_playlist(entries):
