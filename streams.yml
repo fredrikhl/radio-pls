@@ -1,48 +1,48 @@
 # NRK
 - name: NRK P1, Østlandssendingen
-  url: http://lyd.nrk.no/nrk_radio_p1_ostlandssendingen_mp3_h
+  url: http://lyd.nrk.no/nrk_radio_p1_ostlandssendingen_aac_h
   tags:
     - nrk
     - nrk p1
     - p1
 
+- name: NRK P1+
+  url: http://lyd.nrk.no/nrk_radio_p1pluss_aac_h
+  tags:
+    - nrk
+    - nrk p1+
+    - p1+
+
 - name: NRK P2
-  url: http://lyd.nrk.no/nrk_radio_p2_mp3_h
+  url: http://lyd.nrk.no/nrk_radio_p2_aac_h
   tags:
     - nrk
     - nrk p2
     - p2
 
 - name: NRK P3
-  url: http://lyd.nrk.no/nrk_radio_p3_mp3_h
+  url: http://lyd.nrk.no/nrk_radio_p3_aac_h
   tags:
     - nrk
     - nrk p3
     - p3
 
 - name: NRK Radioresepsjonen
-  url: http://lyd.nrk.no/nrk_radio_p3_radioresepsjonen_mp3_h
+  url: http://lyd.nrk.no/nrk_radio_p3_radioresepsjonen_aac_h
   tags:
     - nrk
     - nrk rr
     - radioresepsjonen
 
-- name: NRK P3 Pyro
-  url: http://lyd.nrk.no/nrk_radio_p3_pyro_mp3_h
-  tags:
-    - nrk
-    - nrk pyro
-    - pyro
-
 - name: NRK P3 Urørt
-  url: http://lyd.nrk.no/nrk_radio_p3_urort_mp3_h
+  url: http://lyd.nrk.no/nrk_radio_p3_urort_aac_h
   tags:
     - nrk
     - nrk urørt
     - urørt
 
 - name: NRK Alltid Nyheter
-  url: http://lyd.nrk.no/nrk_radio_alltid_nyheter_mp3_h
+  url: http://lyd.nrk.no/nrk_radio_alltid_nyheter_aac_h
   tags:
     - nrk
     - nrk alltid nyheter
@@ -52,7 +52,8 @@
 # uni
 
 - name: KALX 90.7 FM UC Berkeley
-  url: http://icecast.media.berkeley.edu:8000/kalx-128.ogg
+  url: http://stream.kalx.berkeley.edu:8000/kalx-320.aac
+  # url: http://icecast.media.berkeley.edu:8000/kalx-128.ogg
   tags:
     - kalx
     - uni
@@ -129,10 +130,32 @@
     - wers
     - uni
 
-- name: WGRW 91.5 FM DePauw
+# https://www.wgre.org/
+- name: WGRE 91.5 FM DePauw
   url: http://184.154.90.186:8181
   tags:
-    - wgrw
+    - wgre
+    - uni
+
+# https://wicb.org/
+- name: WICB 91.7 FM Ithaca
+  url: https://streams.wicb.org/stream/4/
+  tags:
+    - wicb
+    - uni
+
+# http://www.wsou.net/
+- name: WSOU 89.5 Seton Hall's Pirate Radio
+  url: http://c11icyelb.prod.playlists.ihrhls.com/5252_icy
+  tags:
+    - wsou
+    - uni
+
+# https://wknc.org/
+- name: WKNC 88.1 FM Raleigh
+  url: http://wknc.sma.ncsu.edu:8000/wknchq.ogg
+  tags:
+    - wknc
     - uni
 
 - name: Radio Nova
@@ -445,3 +468,72 @@
     - music
     - xmas
 
+# BBC
+
+- name: "BBC - Radio 1"
+  url: http://stream.live.vc.bbcmedia.co.uk/bbc_radio_one
+  tags:
+    - bbc
+    - radio1
+
+- name: "BBC - Radio 2"
+  url: http://stream.live.vc.bbcmedia.co.uk/bbc_radio_two
+  tags:
+    - bbc
+    - radio2
+
+- name: "BBC - Radio 3"
+  url: http://stream.live.vc.bbcmedia.co.uk/bbc_radio_three
+  tags:
+    - bbc
+    - radio3
+
+- name: "BBC - Radio 4"
+  url: http://stream.live.vc.bbcmedia.co.uk/bbc_radio_fourfm
+  tags:
+    - bbc
+    - radio4
+
+- name: "BBC - Radio 4 LW (non-UK)"
+  url: http://stream.live.vc.bbcmedia.co.uk/bbc_radio_fourlw_online_nonuk
+  tags:
+    - bbc
+    - radio4lw
+
+- name: "BBC - Radio 5 live (non-UK)"
+  url: http://stream.live.vc.bbcmedia.co.uk/bbc_radio_five_live_online_nonuk
+  tags:
+    - bbc
+    - radio5live
+
+- name: "BBC - Radio 6 Music"
+  url: http://stream.live.vc.bbcmedia.co.uk/bbc_6music
+  tags:
+    - bbc
+    - radio6music
+
+- name: "BBC - Radio 1Xtra"
+  url: http://stream.live.vc.bbcmedia.co.uk/bbc_1xtra
+  tags:
+    - bbc
+    - radio1xtra
+
+- name: "BBC - Radio 4 Extra"
+  url: http://stream.live.vc.bbcmedia.co.uk/bbc_radio_four_extra
+  tags:
+    - bbc
+    - radio4xtra
+
+- name: "BBC - BBC World Service"
+  url: http://stream.live.vc.bbcmedia.co.uk/bbc_world_service
+  tags:
+    - bbc
+    - bbc world
+    - bbc world service
+    - world service
+
+- name: "BBC - Radio London"
+  url: http://stream.live.vc.bbcmedia.co.uk/bbc_london
+  tags:
+    - bbc
+    - bbc london
