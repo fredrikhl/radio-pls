@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """ Make radio PLS playlists. """
-
 from __future__ import unicode_literals, print_function
 
 import argparse
@@ -9,132 +8,104 @@ import os
 import signal
 import sys
 
-PLAYLIST_FORMAT = """
+# compat
+if sys.version_info.major < 3:
+    str = unicode
+
+
+_playlist_format = """
 [playlist]
 
-{content!s}
+{content}
 
 NumberOfEntries={entries:d}
 Version={version:d}
 """.strip()
 
-ENTRY_FORMAT = """
-Title{num:d}={title!s}
-File{num:d}={url!s}
+
+_entry_format = """
+Title{num:d}={title}
+File{num:d}={url}
 Length{num:d}={length:d}
 """.strip()
-
-DEFAULT_ENCODING = 'utf-8'
-DEFAULT_CONFIG = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                              'streams.yml')
 
 
 def format_playlist(entries):
     """ Format a PLS playlist from a list of formatted track entries. """
-    return PLAYLIST_FORMAT.format(
+    return _playlist_format.format(
         content="\n\n".join(
-            ["{:{index}}".format(entry, index=idx+1)
-             for idx, entry in enumerate(entries)]),
+            "{:{index}}".format(entry, index=idx)
+            for idx, entry in enumerate(entries, 1)
+        ),
         entries=len(entries),
         version=2)
 
 
 def format_entry(title, url, length=-1, num=0):
-    """ Format a PLS playlist track entry. """
-    return ENTRY_FORMAT.format(
-        title=title, url=url, length=length, num=num)
+    """ Format a single playlist track. """
+    return _entry_format.format(title=title, url=url, length=length, num=num)
 
 
 class PlsEntry(object):
     """ A playlist entry. """
 
-    __slots__ = ['title', 'file', 'length', 'tags']
+    __slots__ = ('title', 'file', 'length', 'tags')
 
     def __init__(self, title, fileurl, length=-1, tags=None):
         """ Create a playlist entry.
 
-        :param str title:
-            Title of the playlist entry.
-
-        :param str fileurl:
-            The path or url of the playlist entry.
-
-        :param int length:
-            The playtime length of the playlist item (-1 is infinite, this is
-            the default).
+        :param str title: Title of the playlist entry.
+        :param str fileurl: The path or url of the playlist entry.
+        :param int length: The playtime length of the playlist item
         """
-        self.title = unicode(title)
-        self.file = unicode(fileurl)
+        self.title = str(title)
+        self.file = str(fileurl)
         self.length = int(length)
-        self.tags = set()
-        for tag in (tags or []):
-            self.add_tag(tag)
-
-    @staticmethod
-    def make_entry(title, url, length, num):
-        """ Make a PLS playlist entry. """
-        return "\n".join([
-            "Title{:d}={!s}".format(num, title),
-            "File{:d}={!s}".format(num, url),
-            "Length{:d}={!s}".format(num, length), ])
+        self.tags = set(tags or ())
 
     def __cmp__(self, other):
         """ Compare playlist entries by title. """
         if isinstance(other, PlsEntry):
             return cmp(self.title, other.title)
-        return cmp(unicode(self), unicode(other))
+        return cmp(str(self), str(other))
 
     def __str__(self):
         """ String value of this playlist entry. """
         return str(self.title)
 
-    def __unicode__(self):
-        """ Unicode value of this playlist entry. """
-        return self.title
-
     def __repr__(self):
         """ Literal representation of this entry. """
-        u = '{!s}({!r}, {!r}, length={!r}, tags={!r})'.format(
-            type(self).__name__,
-            self.title, self.file, self.length, list(self.tags))
+        u = '{cls}({t}, {f}, length={l}, tags={tt})'.format(
+            cls=type(self).__name__,
+            t=repr(self.title),
+            f=repr(self.file),
+            l=repr(self.length),
+            tt=repr(tuple(self.tags)),
+        )
         return str(u)
 
     def __format__(self, entry_number):
         num = int(entry_number)
         return format_entry(self.title, self.file, length=self.length, num=num)
 
-    def str(self, num):
-        """ Create a playlist entry string for this entry. """
-        return "{:{num:d}}".format(self, num=num)
-
-    def add_tag(self, tag):
-        self.tags.add(tag)
-
     def has_tag(self, tag):
         return tag in self.tags
 
     @classmethod
-    def from_dict(cls, dict_):
-        entry = cls(dict_['name'], dict_['url'])
-        for tag in dict_.get('tags', []):
-            entry.add_tag(tag)
-        return entry
+    def from_dict(cls, d):
+        return cls(d['name'], d['url'], tags=d.get('tags'))
 
 
 class PlaylistCollection(object):
     """ A collection of PlsEntries. """
 
     def __init__(self, *args):
-        self.__entries = list()
+        self.__entries = []
 
         for item in args:
             if not isinstance(item, PlsEntry):
                 raise ValueError("Invalid item {!r}".format(item))
             self.add(item)
-
-    @staticmethod
-    def make_pls(pls_list):
-        return format_playlist(pls_list)
 
     @property
     def entries(self):
@@ -156,30 +127,8 @@ class PlaylistCollection(object):
 
     @classmethod
     def from_data(cls, data):
-        entries = [PlsEntry.from_dict(i) for i in data]
+        entries = tuple(PlsEntry.from_dict(i) for i in data)
         return cls(*entries)
-
-
-def add_bbc(collection):
-    """ hack, the bbc url seems to need an updated timestamp. """
-
-    def __make_bbc_url(name):
-        from time import time
-        return 'http://bbcmedia.ic.llnwd.net/stream/{:s}'.format(
-            'bbcmedia_{:s}_mf_p?s={:d}'.format(name, int(time())))
-
-    entries = [
-        PlsEntry('BBC Radio 1', __make_bbc_url('radio1')),
-        PlsEntry('BBC Radio 2', __make_bbc_url('radio2')),
-        PlsEntry('BBC Radio 3 Classical', __make_bbc_url('radio3')),
-        PlsEntry('BBC Radio 4', __make_bbc_url('radio4fm')),
-        PlsEntry('BBC Radio 5 Live', __make_bbc_url('radio5live')),
-        PlsEntry('BBC Radio 6 Music', __make_bbc_url('6music')),
-    ]
-
-    for entry in entries:
-        entry.add_tag('bbc')
-        collection.add(entry)
 
 
 def parse_config(filename):
@@ -195,7 +144,7 @@ def parse_config(filename):
         import yaml
         data = {}
         with open(filename, 'r') as f:
-            data = yaml.load(f)
+            data = yaml.safe_load(f)
         return data
 
     f_ext = os.path.splitext(filename)[1]
@@ -207,40 +156,57 @@ def parse_config(filename):
         "Unknown file type '{!s}' ({!s})".format(f_ext, filename))
 
 
-def main(args=None):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-l', '--list',
-                        action='store_true',
-                        default=False,
-                        help="List channels")
-    parser.add_argument('-c', '--config',
-                        type=str,
-                        default=DEFAULT_CONFIG,
-                        help="Use config %(metavar)s (%(default)s).")
-    parser.add_argument('-t', '--list-tags',
-                        action='store_true',
-                        default=False,
-                        help="List tags")
-    parser.add_argument('tags',
-                        default=[],
-                        nargs='*',
-                        help="Only include tags.")
+default_encoding = 'utf-8'
+default_config = os.path.join(os.path.dirname(__file__), 'streams.yml')
 
+parser = argparse.ArgumentParser(
+    description="Create a playlist (pls) with a selection of streams",
+)
+parser.add_argument(
+    '-c', '--config',
+    type=str,
+    default=default_config,
+    help="read streams from %(metavar)s (%(default)s)",
+    metavar='<file>',
+)
+parser.add_argument(
+    '-l', '--list',
+    action='store_true',
+    default=False,
+    help="list channels and exit",
+)
+parser.add_argument(
+    '-t', '--list-tags',
+    action='store_true',
+    default=False,
+    help="list available tags and exit",
+)
+parser.add_argument(
+    'tags',
+    nargs='*',
+    help="only include streams with one of the given tags",
+)
+
+
+def _get_collection(config=None):
+    if config:
+        return PlaylistCollection.from_data(parse_config(config))
+    else:
+        return PlaylistCollection()
+
+
+def main(args=None):
     args = parser.parse_args()
 
-    if args.config:
-        custom = PlaylistCollection.from_data(parse_config(args.config))
-    else:
-        custom = PlaylistCollection()
-
-    add_bbc(custom)
-
-    entries = custom.get(*(args.tags))
+    pls_data = _get_collection(args.config)
+    entries = pls_data.get(*(args.tags or ()))
 
     if args.list:
         for entry in entries:
             print("{!s} ({!s})".format(entry, ','.join(entry.tags)))
-    elif args.list_tags:
+        raise SystemExit(0)
+
+    if args.list_tags:
         tags = dict()
         for entry in entries:
             for tag in entry.tags:
@@ -248,9 +214,26 @@ def main(args=None):
         for tag in sorted(tags):
             print(
                 "{!s}:\n  {!s}".format(
-                    tag, "\n  ".join(unicode(e) for e in tags[tag])))
-    else:
-        print(format_playlist(list(entries)))
+                    tag, "\n  ".join(str(e) for e in tags[tag])))
+        raise SystemExit(0)
+
+    print(format_playlist(list(entries)))
+
+
+def get_safe_print(encoding):
+
+    _real_print = print
+
+    def encode_print(*args, **kwargs):
+        kwargs.setdefault('file', sys.stdout)
+        if kwargs['file'] == sys.stdout:
+            args = tuple(
+                value.encode(encoding)
+                if isinstance(value, str)
+                else value
+                for value in args)
+        _real_print(*args, **kwargs)
+        return encode_print
 
 
 if __name__ == '__main__':
@@ -262,15 +245,5 @@ if __name__ == '__main__':
         # Stdout is redirected, and we're missing a sensible default encoding.
         # Try to encode all unicode objects as DEFAULT_ENCODING when printing
         # to stdout.
-        real_print = print
-
-        def print(*args, **kwargs):
-            kwargs.setdefault('file', sys.stdout)
-            if kwargs['file'] == sys.stdout:
-                args = list(args)
-                for index, value in enumerate(args):
-                    if isinstance(value, unicode):
-                        args[index] = value.encode(DEFAULT_ENCODING)
-            real_print(*args, **kwargs)
-
+        print = get_safe_print(default_encoding)
     main()
